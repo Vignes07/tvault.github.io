@@ -2,6 +2,8 @@ import React from "react";
 import UpdateSafe from "../UpdateSafe/UpdateSafe";
 import Popup from "reactjs-popup";
 
+import { setCurId } from "../../Store/reducers/AddSafe";
+
 import "./Safes.css";
 import ShieldLogo from "./assets/icon_safe.png";
 
@@ -9,16 +11,31 @@ import { faPenToSquare, faTrashCan } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { removeSafe } from "../../Store/reducers/AddSafe";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 function Safes(props) {
   const dispatch = useDispatch();
+
+  const curId = useSelector((state) => state.safes.curId);
 
   return (
     <>
       {props.safesList.map((safes) => {
         return (
-          <div key={safes.id} className="safesContainer">
+          <div
+            key={safes.id}
+            className={
+              safes.id === curId.id ? "safesContainerActive" : "safesContainer"
+            }
+            onClick={() => {
+              dispatch(
+                setCurId({
+                  id: safes.id,
+                })
+              );
+              // active();
+            }}
+          >
             <div className="safesInfo">
               <div className="shieldLogo">
                 <img id="ShieldLogo-1" src={ShieldLogo} alt="" />

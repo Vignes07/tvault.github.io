@@ -3,9 +3,18 @@
   align-items: center;
   justify-content: space-between;
   padding: 1rem 1.5rem;
-  background-image: linear-gradient(to right, #72134b, #1d212c);
   height: 2.8rem;
   gap: 1rem;
+}
+
+.safesContainerActive {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  height: 2.8rem;
+  gap: 1rem;
+  background-image: linear-gradient(to right, #72134b, #1d212c);
 }
 
 .safesInfo {

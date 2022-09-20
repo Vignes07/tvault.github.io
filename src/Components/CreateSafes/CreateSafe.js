@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { v4 as uuid } from "uuid";
-import { addSafe } from "../../Store/reducers/AddSafe";
+import { setCurId, addSafe } from "../../Store/reducers/AddSafe";
 import { useDispatch } from "react-redux";
 
 import "./CreateSafe.css";
@@ -19,6 +19,7 @@ function CreateSafe(props) {
   const [owner, setOwner] = useState("");
   const [type, setType] = useState("");
   const [description, setDescription] = useState("");
+  const [secret] = useState([]);
 
   return (
     <div className="createSafeContainer">
@@ -110,6 +111,12 @@ function CreateSafe(props) {
                 owner: owner,
                 type: type,
                 description: description,
+                secret: secret,
+              })
+            );
+            dispatch(
+              setCurId({
+                id: id,
               })
             );
             props.close();

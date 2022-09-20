@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { addSecret } from "../../Store/reducers/AddSafe";
 import { useDispatch } from "react-redux";
 
@@ -8,11 +8,7 @@ import "./CreateSecrets.css";
 function CreateSecrets(props) {
   const dispatch = useDispatch();
 
-  const [name, setName] = useState("");
-
-  useEffect(() => {
-    setName(props.name);
-  }, []);
+  const [secret, setSecret] = useState([]);
 
   return (
     <div className="createSecretContainer">
@@ -25,9 +21,8 @@ function CreateSecrets(props) {
             type="text"
             name="foldername"
             placeholder="Folder Name"
-            value={name}
             onChange={(e) => {
-              setName(e.target.value);
+              setSecret(e.target.value);
             }}
           />
         </div>
@@ -49,7 +44,8 @@ function CreateSecrets(props) {
           onClick={() => {
             dispatch(
               addSecret({
-                hi: name,
+                curId: props.curId,
+                secret: secret,
               })
             );
             props.close();
