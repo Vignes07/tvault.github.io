@@ -1,0 +1,44 @@
+.safesContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  background-image: linear-gradient(to right, #72134b, #1d212c);
+  height: 2.8rem;
+  gap: 1rem;
+}
+
+.safesInfo {
+  display: flex;
+  align-items: center;
+}
+
+#ShieldLogo-1 {
+  width: 2.5rem;
+}
+
+#safeName {
+  color: white;
+  font-size: 16px;
+}
+
+#lastUpdated {
+  color: #5e627c;
+}
+
+.safesDetails {
+  display: flex;
+  flex-direction: column;
+}
+
+.editRemove {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.faPenToSquare,
+.faTrashCan {
+  background: transparent;
+  font-size: 1rem;
+  color: #5e627c;
+}

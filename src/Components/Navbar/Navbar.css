@@ -1,0 +1,50 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: black;
+  height: 70px;
+}
+
+.links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 70px;
+  width: 9rem;
+}
+
+.linkItems {
+  display: flex;
+}
+.linkItems :hover,
+.active {
+  background-image: linear-gradient(to top, #72134b, #1d212c);
+}
+
+a,
+span {
+  text-decoration: none;
+  color: white;
+}
+
+.fileIcon,
+.userIcon {
+  color: white;
+  align-self: center;
+}
+
+.logo,
+.account {
+  margin: 0 5rem;
+}
+
+.account {
+  display: flex;
+  gap: 2rem;
+}
+.documents,
+.user {
+  display: inline-flex;
+  gap: 0.4rem;
+}

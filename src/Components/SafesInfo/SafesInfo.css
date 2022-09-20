@@ -1,0 +1,28 @@
+.infoImg {
+  width: 45rem;
+  height: 11.4rem;
+  transform: translateY(-0.46rem);
+}
+
+.info {
+  background-image: linear-gradient(to top, #151820, #2c3040);
+  height: 10.99rem;
+}
+
+.nameDesc {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  transform: translate(15rem, -8rem);
+  gap: 1rem;
+}
+
+#nameInfo {
+  color: white;
+  font-size: 18px;
+}
+
+#descInfo {
+  color: #c4c4c4;
+  font-size: 12px;
+}
