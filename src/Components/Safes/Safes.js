@@ -18,8 +18,12 @@ function Safes(props) {
 
   const curId = useSelector((state) => state.safes.curId);
 
+  function stop(e) {
+    e.stopPropagation();
+  }
+
   return (
-    <>
+    <div className="safesListContainer">
       {props.safesList.map((safes) => {
         return (
           <div
@@ -45,7 +49,11 @@ function Safes(props) {
                 <span id="lastUpdated">Last Updated: a day ago</span>
               </div>
             </div>
-            <div className="editRemove">
+            <div
+              className={
+                safes.id === curId.id ? "editRemove" : "editRemoveNone"
+              }
+            >
               <Popup
                 trigger={
                   <FontAwesomeIcon
@@ -62,6 +70,7 @@ function Safes(props) {
                     owner={safes.owner}
                     type={safes.type}
                     decription={safes.description}
+                    secret={safes.secret}
                     close={close}
                   />
                 )}
@@ -69,19 +78,20 @@ function Safes(props) {
               <FontAwesomeIcon
                 className="faTrashCan"
                 icon={faTrashCan}
-                onClick={() =>
+                onClick={(e) => {
+                  stop(e);
                   dispatch(
                     removeSafe({
                       id: safes.id,
                     })
-                  )
-                }
+                  );
+                }}
               />
             </div>
           </div>
         );
       })}
-    </>
+    </div>
   );
 }
 

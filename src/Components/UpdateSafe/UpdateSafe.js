@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { updateSafe } from "../../Store/reducers/AddSafe";
 import { useDispatch } from "react-redux";
 
@@ -12,19 +12,12 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 function UpdateSafe(props) {
   const dispatch = useDispatch();
 
-  const [id, setId] = useState("");
-  const [name, setName] = useState("");
-  const [owner, setOwner] = useState("");
-  const [type, setType] = useState("");
-  const [description, setDescription] = useState("");
-
-  useEffect(() => {
-    setId(props.id);
-    setName(props.name);
-    setOwner(props.owner);
-    setType(props.type);
-    setDescription(props.description);
-  }, []);
+  const [id] = useState(props.id);
+  const [name, setName] = useState(props.name);
+  const [owner, setOwner] = useState(props.owner);
+  const [type, setType] = useState(props.type);
+  const [description, setDescription] = useState(props.description);
+  const [secret] = useState(props.secret);
 
   return (
     <div className="createSafeContainer">
@@ -116,6 +109,7 @@ function UpdateSafe(props) {
                 owner: owner,
                 type: type,
                 description: description,
+                secret: secret,
               })
             );
             props.close();

@@ -47,6 +47,7 @@ function CreateSafe(props) {
             type="text"
             name="safeName"
             placeholder="Safe Name"
+            maxlength="10"
             value={name}
             onChange={(e) => {
               setName(e.target.value);
@@ -60,6 +61,7 @@ function CreateSafe(props) {
             type="text"
             name="owner"
             placeholder="Owner"
+            maxlength="10"
             value={owner}
             onChange={(e) => {
               setOwner(e.target.value);
@@ -101,30 +103,38 @@ function CreateSafe(props) {
         >
           Cancel
         </button>
-        <button
-          id="createBtn"
-          onClick={() => {
-            dispatch(
-              addSafe({
-                id: id,
-                name: name,
-                owner: owner,
-                type: type,
-                description: description,
-                secret: secret,
-              })
-            );
-            dispatch(
-              setCurId({
-                id: id,
-              })
-            );
-            props.close();
-          }}
-        >
-          <FontAwesomeIcon id="faPlus" icon={faPlus} />
-          Create
-        </button>
+        {(description.length < 10 || name.length < 1 || owner.length < 1) && (
+          <button disabled={true} id="createBtnDisabled">
+            <FontAwesomeIcon id="faPlus" icon={faPlus} />
+            Create
+          </button>
+        )}
+        {description.length >= 10 && name.length > 1 && owner.length > 1 && (
+          <button
+            id="createBtn"
+            onClick={() => {
+              dispatch(
+                addSafe({
+                  id: id,
+                  name: name,
+                  owner: owner,
+                  type: type,
+                  description: description,
+                  secret: secret,
+                })
+              );
+              dispatch(
+                setCurId({
+                  id: id,
+                })
+              );
+              props.close();
+            }}
+          >
+            <FontAwesomeIcon id="faPlus" icon={faPlus} />
+            Create
+          </button>
+        )}
       </div>
     </div>
   );

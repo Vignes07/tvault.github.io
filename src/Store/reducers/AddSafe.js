@@ -10,10 +10,12 @@ export const safeSlice = createSlice({
     setCurId: (state, action) => {
       state.curId = action.payload;
     },
+
     addSafe: (state, action) => {
       state.value.push(action.payload);
     },
     updateSafe: (state, action) => {
+      console.log(action.payload.id);
       state.value.forEach((safe, index) => {
         if (safe.id === action.payload.id) {
           state.value.splice(index, 1, action.payload);
@@ -26,6 +28,7 @@ export const safeSlice = createSlice({
           state.value.splice(index, 1);
         }
       });
+      state.curId = state.value[0];
     },
     addSecret: (state, action) => {
       state.value.forEach((safe) => {

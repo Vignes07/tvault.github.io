@@ -17,8 +17,12 @@
 .linkItems {
   display: flex;
 }
-.linkItems :hover,
+
 .active {
+  background-image: linear-gradient(to top, #72134b, #1d212c);
+}
+
+.linkItems .links:focus {
   background-image: linear-gradient(to top, #72134b, #1d212c);
 }
 

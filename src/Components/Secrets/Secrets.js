@@ -1,14 +1,15 @@
 import React from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 
 import addFolder from "./assets/folder-plus 1.png";
+import addFolderInactive from "./assets/icon_addfolder_inactive.png";
 import folder from "./assets/folder.png";
 import folderActive from "./assets/folder-active.png";
 
-// import secretsImage from "./assets/Group 14275.png";
+import secretsImage from "./assets/Group 14275.png";
 import "./Secrets.css";
 import Popup from "reactjs-popup";
 import CreateSecrets from "../CreateSecrets/CreateSecrets";
@@ -31,42 +32,86 @@ function Secrets() {
         <div className="folderIcon">
           <span className="addFolder">Add Folder</span>
 
-          <Popup
-            trigger={<img className="addFolderIcon" src={addFolder} alt="" />}
-            modal
-            nested
-          >
-            {(close) => <CreateSecrets curId={curId.id} close={close} />}
-          </Popup>
+          {secretList.length > 0 && (
+            <Popup
+              trigger={<img className="addFolderIcon" src={addFolder} alt="" />}
+              modal
+              nested
+            >
+              {(close) => <CreateSecrets curId={curId.id} close={close} />}
+            </Popup>
+          )}
+          {secretList.length === 0 && (
+            <img className="addFolderIcon" src={addFolderInactive} alt="" />
+          )}
         </div>
       </div>
-      <span id="secretsCount">0 Secrets</span>
-      {/* <div className="secretsImageBackground">
-        <img id="secretsImage" src={secretsImage} alt="" />
-        <p id="addSecretsInfo">
-          Add a <span>Folder</span> and then you'll be able to add{" "}
-          <span>Secrets</span> to view them all here
-        </p>
+
+      <div>
+        {secretList.map((value, index) => {
+          return (
+            secretList.length !== 0 ||
+            (value.id === curId.id && value.secret.length > 0 && (
+              <div key={index}>
+                <span id="secretsCount">{value.secret.length} Secrets</span>
+              </div>
+            ))
+          );
+        })}
       </div>
-      <div className="addSecrets">
-        <Popup
-          trigger={
-            <button id="addSecretsBtn">
-              <FontAwesomeIcon className="faPlus" icon={faPlus} />
-              <span id="addBtnText">Add</span>
-            </button>
-          }
-          modal
-          nested
-        >
-          {(close) => <CreateSecrets close={close} />}
-        </Popup>
-      </div> */}
+
+      <div>
+        {secretList.length === 0 && (
+          <div>
+            <span id="secretsCount">0 Secrets</span>
+            <div className="secretsImageBackground">
+              <img id="secretsImage" src={secretsImage} alt="" />
+              <p id="addSecretsInfo">
+                Add a <span>Folder</span> and then you'll be able to add{" "}
+                <span>Secrets</span> to view them all here
+              </p>
+            </div>
+            <div className="addSecrets">
+              <Popup
+                trigger={
+                  <button id="addSecretsBtn">
+                    <FontAwesomeIcon className="faPlus" icon={faPlus} />
+                    <span id="addBtnText">Add</span>
+                  </button>
+                }
+                modal
+                nested
+              >
+                {secretList.length > 0 && (
+                  <Popup
+                    trigger={
+                      <img className="addFolderIcon" src={addFolder} alt="" />
+                    }
+                    modal
+                    nested
+                  >
+                    {(close) => (
+                      <CreateSecrets curId={curId.id} close={close} />
+                    )}
+                  </Popup>
+                )}
+                {secretList.length === 0 && (
+                  <img
+                    className="addFolderIcon"
+                    src={addFolderInactive}
+                    alt=""
+                  />
+                )}
+              </Popup>
+            </div>
+          </div>
+        )}
+      </div>
 
       <div className="secrets">
-        {secretList.map((value, index) => {
+        {secretList.map((value) => {
           return value.id === curId.id ? (
-            <div key={index}>
+            <div key={value.id}>
               {value.secret.map((x, index) => {
                 return (
                   <div key={index} className="secretList">
@@ -111,3 +156,7 @@ function Secrets() {
 }
 
 export default Secrets;
+
+// ||
+//             value.secret.length > 0 ||
+//             value.id === curId.id

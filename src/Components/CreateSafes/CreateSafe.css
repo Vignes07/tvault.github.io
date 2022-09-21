@@ -97,6 +97,22 @@
   color: white;
 }
 
+#createBtnDisabled {
+  font-size: 14px;
+  font-weight: bold;
+  width: 7rem;
+  height: 2.3rem;
+  border: none;
+  padding: 0.5rem;
+  background-color: white;
+  color: #e20074;
+}
+
+#createBtnDisabled #faPlus {
+  color: #e20074;
+  padding-right: 5px;
+}
+
 #cancelBtn {
   color: #e20074;
 }

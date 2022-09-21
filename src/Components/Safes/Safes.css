@@ -44,10 +44,18 @@
   display: flex;
   gap: 0.5rem;
 }
+.editRemoveNone {
+  display: none;
+}
 
 .faPenToSquare,
 .faTrashCan {
   background: transparent;
   font-size: 1rem;
   color: #5e627c;
+}
+
+.safesListContainer {
+  height: 28rem;
+  overflow-y: auto;
 }

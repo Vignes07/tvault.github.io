@@ -62,6 +62,7 @@
   align-items: center;
   justify-content: center;
   padding-top: 8rem;
+  transform: translateY(-30rem);
 }
 
 .addImage {
@@ -69,9 +70,6 @@
 }
 
 .addBtn {
-  /* position: absolute;
-  top: 39rem;
-  left: 32rem; */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -93,4 +91,14 @@
 
 .safes {
   z-index: 999;
+}
+
+.hasSafes img,
+.hasSafes p {
+  display: none;
+}
+
+.hasSafes > .addBtn {
+  position: absolute;
+  transform: translate(26rem, 0.8rem);
 }

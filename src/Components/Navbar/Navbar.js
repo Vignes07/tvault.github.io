@@ -12,6 +12,7 @@ function Navbar() {
   const shadow = {
     boxShadow: "0 5px 25px #72134b",
   };
+
   return (
     <BrowserRouter>
       <nav className="header" style={shadow}>
@@ -22,7 +23,7 @@ function Navbar() {
           <Link className="active links" to="/">
             Safes
           </Link>
-          <Link className="links" to="/vaultapproles">
+          <Link className="links" to="/vaultapproles/data=hello">
             Vault App Roles
           </Link>
           <Link className="links" to="/service">
@@ -52,7 +53,7 @@ function Navbar() {
       </nav>
       <Routes>
         <Route path="/" element={<Safes />} />
-        <Route path="/vaultapproles" element={<VaultAppRoles />} />
+        <Route path="/vaultapproles/:id" element={<VaultAppRoles />} />
       </Routes>
     </BrowserRouter>
   );
