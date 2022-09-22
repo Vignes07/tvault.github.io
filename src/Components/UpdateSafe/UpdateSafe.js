@@ -19,6 +19,8 @@ function UpdateSafe(props) {
   const [description, setDescription] = useState(props.description);
   const [secret] = useState(props.secret);
 
+  console.log(props.description);
+
   return (
     <div className="createSafeContainer">
       <div className="information">

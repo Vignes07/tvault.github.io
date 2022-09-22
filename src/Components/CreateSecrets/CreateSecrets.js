@@ -21,7 +21,6 @@ function CreateSecrets(props) {
             type="text"
             name="foldername"
             placeholder="Folder Name"
-            maxlength="10"
             onChange={(e) => {
               setSecret(e.target.value);
             }}

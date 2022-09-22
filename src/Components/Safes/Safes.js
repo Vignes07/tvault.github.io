@@ -18,6 +18,8 @@ function Safes(props) {
 
   const curId = useSelector((state) => state.safes.curId);
 
+  console.log(props.safesList);
+
   function stop(e) {
     e.stopPropagation();
   }
@@ -37,7 +39,6 @@ function Safes(props) {
                   id: safes.id,
                 })
               );
-              // active();
             }}
           >
             <div className="safesInfo">
@@ -69,7 +70,7 @@ function Safes(props) {
                     name={safes.name}
                     owner={safes.owner}
                     type={safes.type}
-                    decription={safes.description}
+                    description={safes.description}
                     secret={safes.secret}
                     close={close}
                   />

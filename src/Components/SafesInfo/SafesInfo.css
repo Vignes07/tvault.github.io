@@ -17,6 +17,15 @@
   gap: 0.4rem;
 }
 
+.nameDesc > span {
+  width: 20rem;
+  height: 3rem;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 #nameInfo {
   color: white;
   font-size: 23px;

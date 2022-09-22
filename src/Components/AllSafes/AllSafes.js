@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./AllSafes.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faPlus } from "@fortawesome/free-solid-svg-icons";
@@ -12,24 +12,20 @@ import { useSelector } from "react-redux";
 function AllSafes() {
   const safesList = useSelector((state) => state.safes.value);
 
-  const [result, setResult] = useState(
-    useSelector((state) => state.safes.value)
-  );
+  // console.log(safesList);
 
-  console.log(result);
+  const [res, setres] = useState(safesList);
 
   const handleChange = (e) => {
+    console.log(e.target.value.length);
     const filter = safesList.filter((value) => {
       return value.name.toLowerCase().includes(e.target.value.toLowerCase());
     });
 
-    console.log(e.target.value);
-
-    if (e.target.value === "") {
-      console.log(safesList);
-      setResult(safesList);
+    if (e.target.value.length === 0) {
+      setres(safesList);
     } else {
-      setResult(filter);
+      setres(filter);
     }
   };
 
@@ -52,8 +48,8 @@ function AllSafes() {
       </header>
       <div className="safesList">
         <div className="safes">
-          {result.length !== 0 && <Safes safesList={result} />}
-          {result.length === 0 && <Safes safesList={safesList} />}
+          {res.length !== 0 && <Safes safesList={res} />}
+          {res.length === 0 && <Safes safesList={safesList} />}
         </div>
         <div className={safesList.length > 0 ? "hasSafes" : "noSafesInfo"}>
           <img className="addImage" src={image} alt={"#"} />

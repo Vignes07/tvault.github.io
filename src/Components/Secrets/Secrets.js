@@ -50,12 +50,12 @@ function Secrets() {
       <div>
         {secretList.map((value, index) => {
           return (
-            secretList.length !== 0 ||
-            (value.id === curId.id && value.secret.length > 0 && (
+            secretList.length !== 0 &&
+            value.id === curId.id && (
               <div key={index}>
                 <span id="secretsCount">{value.secret.length} Secrets</span>
               </div>
-            ))
+            )
           );
         })}
       </div>
@@ -63,7 +63,6 @@ function Secrets() {
       <div>
         {secretList.length === 0 && (
           <div>
-            <span id="secretsCount">0 Secrets</span>
             <div className="secretsImageBackground">
               <img id="secretsImage" src={secretsImage} alt="" />
               <p id="addSecretsInfo">
@@ -72,40 +71,70 @@ function Secrets() {
               </p>
             </div>
             <div className="addSecrets">
-              <Popup
-                trigger={
-                  <button id="addSecretsBtn">
-                    <FontAwesomeIcon className="faPlus" icon={faPlus} />
-                    <span id="addBtnText">Add</span>
-                  </button>
-                }
-                modal
-                nested
-              >
-                {secretList.length > 0 && (
-                  <Popup
-                    trigger={
-                      <img className="addFolderIcon" src={addFolder} alt="" />
-                    }
-                    modal
-                    nested
-                  >
-                    {(close) => (
-                      <CreateSecrets curId={curId.id} close={close} />
-                    )}
-                  </Popup>
-                )}
-                {secretList.length === 0 && (
-                  <img
-                    className="addFolderIcon"
-                    src={addFolderInactive}
-                    alt=""
-                  />
-                )}
-              </Popup>
+              {secretList.length > 0 && (
+                <Popup
+                  trigger={
+                    <button id="addSecretsBtnActive">
+                      <FontAwesomeIcon className="faPlus" icon={faPlus} />
+                      <span id="addBtnText">Add</span>
+                    </button>
+                  }
+                  modal
+                >
+                  {(close) => <CreateSecrets curId={curId.id} close={close} />}
+                </Popup>
+              )}
+              {secretList.length === 0 && (
+                <button id="addSecretsBtn">
+                  <FontAwesomeIcon className="faPlus" icon={faPlus} />
+                  <span id="addBtnText">Add</span>
+                </button>
+              )}
             </div>
           </div>
         )}
+      </div>
+
+      <div>
+        {secretList.map((value) => {
+          return (
+            value.id === curId.id &&
+            value.secret.length === 0 && (
+              <div>
+                <div className="secretsImageBackground">
+                  <img id="secretsImage" src={secretsImage} alt="" />
+                  <p id="addSecretsInfo">
+                    Add a <span>Folder</span> and then you'll be able to add{" "}
+                    <span>Secrets</span> to view them all here
+                  </p>
+                </div>
+                <div className="addSecrets">
+                  {secretList.length > 0 && (
+                    <Popup
+                      trigger={
+                        <button id="addSecretsBtnActive">
+                          <FontAwesomeIcon className="faPlus" icon={faPlus} />
+                          <span id="addBtnText">Add</span>
+                        </button>
+                      }
+                      modal
+                    >
+                      {(close) => (
+                        <CreateSecrets curId={curId.id} close={close} />
+                      )}
+                    </Popup>
+                  )}
+                  {secretList.length === 0 && (
+                    <button id="addSecretsBtn">
+                      <FontAwesomeIcon className="faPlus" icon={faPlus} />
+                      <span id="addBtnText">Add</span>
+                    </button>
+                  )}
+                </div>
+              </div>
+            )
+          );
+        })}
       </div>
 
       <div className="secrets">
@@ -156,7 +185,3 @@ function Secrets() {
 }
 
 export default Secrets;
-
-// ||
-//             value.secret.length > 0 ||
-//             value.id === curId.id

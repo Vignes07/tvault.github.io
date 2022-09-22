@@ -47,7 +47,6 @@ function CreateSafe(props) {
             type="text"
             name="safeName"
             placeholder="Safe Name"
-            maxlength="10"
             value={name}
             onChange={(e) => {
               setName(e.target.value);
@@ -61,7 +60,6 @@ function CreateSafe(props) {
             type="text"
             name="owner"
             placeholder="Owner"
-            maxlength="10"
             value={owner}
             onChange={(e) => {
               setOwner(e.target.value);

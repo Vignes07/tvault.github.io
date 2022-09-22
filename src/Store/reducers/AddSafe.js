@@ -15,7 +15,6 @@ export const safeSlice = createSlice({
       state.value.push(action.payload);
     },
     updateSafe: (state, action) => {
-      console.log(action.payload.id);
       state.value.forEach((safe, index) => {
         if (safe.id === action.payload.id) {
           state.value.splice(index, 1, action.payload);

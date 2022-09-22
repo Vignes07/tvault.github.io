@@ -40,6 +40,14 @@
   flex-direction: column;
 }
 
+.safesDetails > span {
+  width: 10rem;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .editRemove {
   display: flex;
   gap: 0.5rem;
