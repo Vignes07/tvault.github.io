@@ -20,6 +20,11 @@
 }
 
 .active {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 70px;
+  width: 9rem;
   background-image: linear-gradient(to top, #72134b, #1d212c);
 }
 

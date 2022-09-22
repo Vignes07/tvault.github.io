@@ -21,6 +21,8 @@ function CreateSafe(props) {
   const [description, setDescription] = useState("");
   const [secret] = useState([]);
 
+  console.log(type);
+
   return (
     <div className="createSafeContainer">
       <div className="information">
@@ -74,8 +76,8 @@ function CreateSafe(props) {
               setType(e.target.value);
             }}
           >
-            <option value="Personal">Personal</option>
-            <option value="Other">Other</option>
+            <option value={"Personal"}>Personal</option>
+            <option value={"Other"}>Other</option>
           </select>
         </div>
         <div className="description">
@@ -111,6 +113,7 @@ function CreateSafe(props) {
           <button
             id="createBtn"
             onClick={() => {
+              console.log(type);
               dispatch(
                 addSafe({
                   id: id,

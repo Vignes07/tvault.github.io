@@ -12,21 +12,30 @@ import { useSelector } from "react-redux";
 function AllSafes() {
   const safesList = useSelector((state) => state.safes.value);
 
-  // console.log(safesList);
+  const [res, setres] = useState([]);
 
-  const [res, setres] = useState(safesList);
+  useEffect(() => {
+    setres(safesList);
+  }, [safesList]);
 
-  const handleChange = (e) => {
-    console.log(e.target.value.length);
+  console.log(res);
+
+  const [input, setinput] = useState("");
+
+  useEffect(() => {
     const filter = safesList.filter((value) => {
-      return value.name.toLowerCase().includes(e.target.value.toLowerCase());
+      return value.name.toLowerCase().includes(input.toLowerCase());
     });
 
-    if (e.target.value.length === 0) {
+    if (input === "") {
       setres(safesList);
     } else {
       setres(filter);
     }
+  }, [input]);
+
+  const handleChange = (e) => {
+    setinput(e.target.value);
   };
 
   return (
@@ -42,13 +51,14 @@ function AllSafes() {
             className="searchField"
             type={"text"}
             placeholder={"Search"}
+            value={input}
             onChange={handleChange}
           />
         </div>
       </header>
       <div className="safesList">
         <div className="safes">
-          {res.length !== 0 && <Safes safesList={res} />}
+          {res.length !== 0 && <Safes safesList={res} setRes={setres} />}
           {res.length === 0 && <Safes safesList={safesList} />}
         </div>
         <div className={safesList.length > 0 ? "hasSafes" : "noSafesInfo"}>

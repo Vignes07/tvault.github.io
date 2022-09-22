@@ -100,7 +100,7 @@ function Secrets() {
           return (
             value.id === curId.id &&
             value.secret.length === 0 && (
-              <div>
+              <div key={value.id}>
                 <div className="secretsImageBackground">
                   <img id="secretsImage" src={secretsImage} alt="" />
                   <p id="addSecretsInfo">

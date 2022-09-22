@@ -19,8 +19,6 @@ function UpdateSafe(props) {
   const [description, setDescription] = useState(props.description);
   const [secret] = useState(props.secret);
 
-  console.log(props.description);
-
   return (
     <div className="createSafeContainer">
       <div className="information">
@@ -73,9 +71,10 @@ function UpdateSafe(props) {
             onChange={(e) => {
               setType(e.target.value);
             }}
+            defaultValue={type}
           >
-            <option value="Personal">Personal</option>
-            <option value="Other">Other</option>
+            <option>Personal</option>
+            <option>Other</option>
           </select>
         </div>
         <div className="description">
