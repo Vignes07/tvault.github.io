@@ -30,11 +30,16 @@ function Secrets() {
           <span className="secretsNav">Secrets</span>
         </div>
         <div className="folderIcon">
-          <span className="addFolder">Add Folder</span>
+          {/* <span className="addFolder">Add Folder</span> */}
 
           {secretList.length > 0 && (
             <Popup
-              trigger={<img className="addFolderIcon" src={addFolder} alt="" />}
+              trigger={
+                <div id="popupSecret">
+                  <span className="addFolder">Add Folder</span>
+                  <img className="addFolderIcon" src={addFolder} alt="" />
+                </div>
+              }
               modal
               nested
             >

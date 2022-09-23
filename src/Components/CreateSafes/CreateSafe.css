@@ -84,6 +84,7 @@
 
 #createBtn,
 #cancelBtn {
+  cursor: pointer;
   font-size: 14px;
   font-weight: bold;
   width: 7rem;
@@ -98,13 +99,14 @@
 }
 
 #createBtnDisabled {
+  cursor: pointer;
   font-size: 14px;
   font-weight: bold;
   width: 7rem;
   height: 2.3rem;
   border: none;
   padding: 0.5rem;
-  background-color: white;
+  background-color: gray;
   color: #e20074;
 }
 
