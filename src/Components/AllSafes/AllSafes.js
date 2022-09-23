@@ -49,7 +49,7 @@ function AllSafes() {
       <header className="safesHeader">
         <p>
           <span id="text">All Safes</span>
-          <span id="count">({safesList.length})</span>
+          <span id="count">({res.length})</span>
         </p>
         <div className="searchContainer">
           <FontAwesomeIcon className="searchIcon" icon={faSearch} />
