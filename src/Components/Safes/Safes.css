@@ -63,6 +63,10 @@
   color: #5e627c;
 }
 
+.safesListContainer::-webkit-scrollbar {
+  display: none;
+}
+
 .safesListContainer {
   height: 28rem;
   overflow-y: auto;
