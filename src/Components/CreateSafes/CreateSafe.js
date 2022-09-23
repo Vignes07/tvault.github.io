@@ -21,8 +21,6 @@ function CreateSafe(props) {
   const [description, setDescription] = useState("");
   const [secret] = useState([]);
 
-  console.log(type);
-
   return (
     <div className="createSafeContainer">
       <div className="information">
@@ -113,7 +111,6 @@ function CreateSafe(props) {
           <button
             id="createBtn"
             onClick={() => {
-              console.log(type);
               dispatch(
                 addSafe({
                   id: id,

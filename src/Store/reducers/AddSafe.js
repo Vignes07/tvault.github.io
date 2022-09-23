@@ -27,7 +27,7 @@ export const safeSlice = createSlice({
           state.value.splice(index, 1);
         }
       });
-      state.curId = state.value[0];
+      state.curId = state.value.length ? state.value[0] : "";
     },
     addSecret: (state, action) => {
       state.value.forEach((safe) => {

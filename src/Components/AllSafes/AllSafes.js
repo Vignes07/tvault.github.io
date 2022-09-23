@@ -12,31 +12,37 @@ import { useSelector } from "react-redux";
 function AllSafes() {
   const safesList = useSelector((state) => state.safes.value);
 
-  const [res, setres] = useState([]);
-
-  useEffect(() => {
-    setres(safesList);
-  }, [safesList]);
-
-  console.log(res);
+  const [res, setres] = useState(safesList);
 
   const [input, setinput] = useState("");
 
   useEffect(() => {
-    const filter = safesList.filter((value) => {
-      return value.name.toLowerCase().includes(input.toLowerCase());
-    });
-
     if (input === "") {
       setres(safesList);
     } else {
+      const filter = safesList.filter((value) => {
+        return value.name.toLowerCase().includes(input.toLowerCase());
+      });
       setres(filter);
     }
-  }, [input]);
+  }, [input, safesList]);
 
   const handleChange = (e) => {
     setinput(e.target.value);
   };
+
+  // const handleChange = (e) => {
+  //   // setinput(e.target.value);
+  //   const filter = e.target.value.filter((value) => {
+  //     return value.name.toLowerCase().includes(e.target.value.toLowerCase());
+  //   });
+
+  //   if (e.target.value === "") {
+  //     setres(safesList);
+  //   } else {
+  //     setres(filter);
+  //   }
+  // };
 
   return (
     <div className="allSafes">
@@ -51,15 +57,14 @@ function AllSafes() {
             className="searchField"
             type={"text"}
             placeholder={"Search"}
-            value={input}
             onChange={handleChange}
           />
         </div>
       </header>
       <div className="safesList">
         <div className="safes">
-          {res.length !== 0 && <Safes safesList={res} setRes={setres} />}
-          {res.length === 0 && <Safes safesList={safesList} />}
+          {<Safes safesList={res} setRes={setres} />}
+          {/* {res.length === 0 && <Safes safesList={safesList} />} */}
         </div>
         <div className={safesList.length > 0 ? "hasSafes" : "noSafesInfo"}>
           <img className="addImage" src={image} alt={"#"} />

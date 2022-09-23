@@ -63,6 +63,7 @@ function Secrets() {
       <div>
         {secretList.length === 0 && (
           <div>
+            <span id="secretsCount">0 Secrets</span>
             <div className="secretsImageBackground">
               <img id="secretsImage" src={secretsImage} alt="" />
               <p id="addSecretsInfo">
