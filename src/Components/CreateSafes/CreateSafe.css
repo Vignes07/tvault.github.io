@@ -48,6 +48,12 @@
   font-size: 13px;
 }
 
+#alreadyExists {
+  color: red;
+  font-size: 10px;
+  font-weight: bold;
+}
+
 #safeNameInput,
 #ownerInput {
   height: 0.8rem;
@@ -107,11 +113,11 @@
   border: none;
   padding: 0.5rem;
   background-color: gray;
-  color: #e20074;
+  color: white;
 }
 
 #createBtnDisabled #faPlus {
-  color: #e20074;
+  color: white;
   padding-right: 5px;
 }
 

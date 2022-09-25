@@ -17,9 +17,10 @@ import CreateSecrets from "../CreateSecrets/CreateSecrets";
 import { removeSecret } from "../../Store/reducers/AddSafe";
 import { useSelector, useDispatch } from "react-redux";
 
-function Secrets() {
+function Secrets(props) {
   const dispatch = useDispatch();
-  const curId = useSelector((state) => state.safes.curId);
+  // const curId = useSelector((state) => state.safes.curId);
+  const curId = props.curId;
 
   const secretList = useSelector((state) => state.safes.value);
 
@@ -32,7 +33,7 @@ function Secrets() {
         <div className="folderIcon">
           {/* <span className="addFolder">Add Folder</span> */}
 
-          {secretList.length > 0 && (
+          {secretList.length > 0 && curId !== 0 && (
             <Popup
               trigger={
                 <div id="popupSecret">
@@ -43,11 +44,14 @@ function Secrets() {
               modal
               nested
             >
-              {(close) => <CreateSecrets curId={curId.id} close={close} />}
+              {(close) => <CreateSecrets curId={curId} close={close} />}
             </Popup>
           )}
-          {secretList.length === 0 && (
-            <img className="addFolderIcon" src={addFolderInactive} alt="" />
+          {(secretList.length === 0 || curId === 0) && (
+            <div id="popupSecret">
+              <span className="addFolder">Add Folder</span>
+              <img className="addFolderIcon" src={addFolderInactive} alt="" />
+            </div>
           )}
         </div>
       </div>
@@ -56,7 +60,7 @@ function Secrets() {
         {secretList.map((value, index) => {
           return (
             secretList.length !== 0 &&
-            value.id === curId.id && (
+            value.id === curId && (
               <div key={index}>
                 <span id="secretsCount">{value.secret.length} Secrets</span>
               </div>
@@ -66,7 +70,7 @@ function Secrets() {
       </div>
 
       <div>
-        {secretList.length === 0 && (
+        {(secretList.length === 0 || curId === 0) && (
           <div>
             <span id="secretsCount">0 Secrets</span>
             <div className="secretsImageBackground">
@@ -77,7 +81,7 @@ function Secrets() {
               </p>
             </div>
             <div className="addSecrets">
-              {secretList.length > 0 && (
+              {secretList.length > 0 && curId !== 0 && (
                 <Popup
                   trigger={
                     <button id="addSecretsBtnActive">
@@ -87,15 +91,16 @@ function Secrets() {
                   }
                   modal
                 >
-                  {(close) => <CreateSecrets curId={curId.id} close={close} />}
+                  {(close) => <CreateSecrets curId={curId} close={close} />}
                 </Popup>
               )}
-              {secretList.length === 0 && (
-                <button id="addSecretsBtn">
-                  <FontAwesomeIcon className="faPlus" icon={faPlus} />
-                  <span id="addBtnText">Add</span>
-                </button>
-              )}
+              {secretList.length === 0 ||
+                (curId === 0 && (
+                  <button id="addSecretsBtn">
+                    <FontAwesomeIcon className="faPlus" icon={faPlus} />
+                    <span id="addBtnText">Add</span>
+                  </button>
+                ))}
             </div>
           </div>
         )}
@@ -104,7 +109,7 @@ function Secrets() {
       <div>
         {secretList.map((value) => {
           return (
-            value.id === curId.id &&
+            value.id === curId &&
             value.secret.length === 0 && (
               <div key={value.id}>
                 <div className="secretsImageBackground">
@@ -125,9 +130,7 @@ function Secrets() {
                       }
                       modal
                     >
-                      {(close) => (
-                        <CreateSecrets curId={curId.id} close={close} />
-                      )}
+                      {(close) => <CreateSecrets curId={curId} close={close} />}
                     </Popup>
                   )}
                   {secretList.length === 0 && (
@@ -145,7 +148,7 @@ function Secrets() {
 
       <div className="secrets">
         {secretList.map((value) => {
-          return value.id === curId.id ? (
+          return value.id === curId ? (
             <div key={value.id}>
               {value.secret.map((x, index) => {
                 return (
@@ -171,7 +174,7 @@ function Secrets() {
                         onClick={() =>
                           dispatch(
                             removeSecret({
-                              id: x,
+                              secret: x,
                             })
                           )
                         }

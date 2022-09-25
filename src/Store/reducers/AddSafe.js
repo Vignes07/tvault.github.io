@@ -39,7 +39,7 @@ export const safeSlice = createSlice({
     removeSecret: (state, action) => {
       state.value.forEach((secrets) => {
         secrets.secret.forEach((value, index) => {
-          if (value === action.payload.id) {
+          if (value === action.payload.secret) {
             secrets.secret.splice(index, 1);
           }
         });

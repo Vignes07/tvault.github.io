@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { addSecret } from "../../Store/reducers/AddSafe";
 import { useDispatch } from "react-redux";
 
@@ -8,7 +8,16 @@ import "./CreateSecrets.css";
 function CreateSecrets(props) {
   const dispatch = useDispatch();
 
-  const [secret, setSecret] = useState([]);
+  const [secret, setSecret] = useState("");
+  const [isTrue, setisTrue] = useState(false);
+
+  useEffect(() => {
+    if (secret.match(/^[0-9a-z_]+$/)) {
+      setisTrue(true);
+    } else {
+      setisTrue(false);
+    }
+  }, [secret]);
 
   return (
     <div className="createSecretContainer">
@@ -26,9 +35,15 @@ function CreateSecrets(props) {
             }}
           />
         </div>
-        <span id="regex">
-          Please enter lowercase alphabets, numbers and underscores only.
-        </span>
+        {isTrue ? (
+          <span id="regex">
+            Please enter lowercase alphabets, numbers and underscores only.
+          </span>
+        ) : (
+          <span id="regexInvalid">
+            Please enter lowercase alphabets, numbers and underscores only. *
+          </span>
+        )}
       </div>
       <div className="saveCancelBtn">
         <button
@@ -39,20 +54,24 @@ function CreateSecrets(props) {
         >
           Cancel
         </button>
-        <button
-          id="saveBtn"
-          onClick={() => {
-            dispatch(
-              addSecret({
-                curId: props.curId,
-                secret: secret,
-              })
-            );
-            props.close();
-          }}
-        >
-          Save
-        </button>
+        {secret.length === 0 || !isTrue ? (
+          <button id="saveBtnInactive">Save</button>
+        ) : (
+          <button
+            id="saveBtn"
+            onClick={() => {
+              dispatch(
+                addSecret({
+                  curId: props.curId,
+                  secret: secret,
+                })
+              );
+              props.close();
+            }}
+          >
+            Save
+          </button>
+        )}
       </div>
     </div>
   );

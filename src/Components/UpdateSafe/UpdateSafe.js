@@ -1,7 +1,6 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { updateSafe } from "../../Store/reducers/AddSafe";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import "./UpdateSafe.css";
 import ShieldLogo from "./assets/icon_safe.png";
@@ -12,12 +11,25 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 function UpdateSafe(props) {
   const dispatch = useDispatch();
 
+  const safesList = useSelector((state) => state.safes.value);
+
   const [id] = useState(props.id);
   const [name, setName] = useState(props.name);
   const [owner, setOwner] = useState(props.owner);
   const [type, setType] = useState(props.type);
   const [description, setDescription] = useState(props.description);
   const [secret] = useState(props.secret);
+
+  const [exists, setexists] = useState(true);
+
+  useEffect(() => {
+    function safeExists(n) {
+      return safesList.some(function (el) {
+        return props.name !== name && el.name === n;
+      });
+    }
+    setexists(safeExists(name));
+  }, [name, safesList, props.name]);
 
   return (
     <div className="createSafeContainer">
@@ -39,7 +51,14 @@ function UpdateSafe(props) {
       </div>
       <div className="inputs">
         <div className="safeName">
-          <label id="safeNameLabel">Safe Name</label>
+          <label id="safeNameLabel">
+            Safe Name &emsp;
+            {exists ? (
+              <label id="alreadyExists">* Safe already exists</label>
+            ) : (
+              ""
+            )}
+          </label>
           <input
             id="safeNameInput"
             type="text"
@@ -100,25 +119,35 @@ function UpdateSafe(props) {
         >
           Cancel
         </button>
-        <button
-          id="createBtn"
-          onClick={() => {
-            dispatch(
-              updateSafe({
-                id: id,
-                name: name,
-                owner: owner,
-                type: type,
-                description: description,
-                secret: secret,
-              })
-            );
-            props.close();
-          }}
-        >
-          <FontAwesomeIcon id="faPlus" icon={faPlus} />
-          Update
-        </button>
+        {description.length < 10 ||
+        name.length < 1 ||
+        owner.length < 1 ||
+        exists ? (
+          <button disabled={true} id="createBtnDisabled">
+            <FontAwesomeIcon id="faPlus" icon={faPlus} />
+            Update
+          </button>
+        ) : (
+          <button
+            id="createBtn"
+            onClick={() => {
+              dispatch(
+                updateSafe({
+                  id: id,
+                  name: name,
+                  owner: owner,
+                  type: type,
+                  description: description,
+                  secret: secret,
+                })
+              );
+              props.close();
+            }}
+          >
+            <FontAwesomeIcon id="faPlus" icon={faPlus} />
+            Update
+          </button>
+        )}
       </div>
     </div>
   );

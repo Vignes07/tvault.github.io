@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import UpdateSafe from "../UpdateSafe/UpdateSafe";
 import Popup from "reactjs-popup";
 
@@ -18,12 +18,19 @@ function Safes(props) {
 
   const curId = useSelector((state) => state.safes.curId);
 
+  useEffect(() => {
+    props.setfilteredId(curId.id);
+  }, [curId]);
+
   function stop(e) {
     e.stopPropagation();
   }
 
   return (
     <div className="safesListContainer">
+      {props.list.length !== 0 && props.safesList.length === 0 && (
+        <div className="noResults">No Safes found</div>
+      )}
       {props.safesList.length > 0 &&
         props.safesList.map((safes) => {
           return (

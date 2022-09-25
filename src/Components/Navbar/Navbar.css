@@ -1,18 +1,20 @@
 .header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-evenly;
   background-color: black;
-  height: 70px;
-  max-width: max-content;
+  height: 9vh;
+  width: 100%;
 }
 
 .links {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 70px;
-  width: 9rem;
+  /* height: 70px; */
+  height: 9vh;
+  width: 9vw;
+  /* width: 9rem; */
 }
 
 .linkItems {
@@ -23,8 +25,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 70px;
-  width: 9rem;
+  /* height: 70px; */
+  height: 9vh;
+  width: 9vw;
+  /* width: 9rem; */
   background-image: linear-gradient(to top, #72134b, #1d212c);
 }
 
@@ -34,19 +38,16 @@
 
 a,
 span {
+  font-size: 0.8vw;
   text-decoration: none;
   color: white;
 }
 
 .fileIcon,
 .userIcon {
+  font-size: 0.8vw;
   color: white;
   align-self: center;
-}
-
-.logo,
-.account {
-  margin: 0 6.67rem;
 }
 
 .account {
@@ -55,6 +56,11 @@ span {
 }
 .documents,
 .user {
-  display: inline-flex;
+  display: flex;
+  align-items: center;
   gap: 0.4rem;
+}
+
+.logo > img {
+  width: 10vw;
 }

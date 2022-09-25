@@ -1,8 +1,8 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { v4 as uuid } from "uuid";
 import { setCurId, addSafe } from "../../Store/reducers/AddSafe";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import "./CreateSafe.css";
 import ShieldLogo from "./assets/icon_safe.png";
@@ -13,6 +13,8 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 function CreateSafe(props) {
   const dispatch = useDispatch();
 
+  const safesList = useSelector((state) => state.safes.value);
+
   const uid = uuid();
   const id = uid.slice(0, 6);
   const [name, setName] = useState("");
@@ -20,6 +22,17 @@ function CreateSafe(props) {
   const [type, setType] = useState("");
   const [description, setDescription] = useState("");
   const [secret] = useState([]);
+
+  const [exists, setexists] = useState(true);
+
+  useEffect(() => {
+    function safeExists(n) {
+      return safesList.some(function (el) {
+        return el.name === n;
+      });
+    }
+    setexists(safeExists(name));
+  }, [name, safesList]);
 
   return (
     <div className="createSafeContainer">
@@ -41,7 +54,14 @@ function CreateSafe(props) {
       </div>
       <div className="inputs">
         <div className="safeName">
-          <label id="safeNameLabel">Safe Name</label>
+          <label id="safeNameLabel">
+            Safe Name &emsp;
+            {exists ? (
+              <label id="alreadyExists">* Safe already exists</label>
+            ) : (
+              ""
+            )}
+          </label>
           <input
             id="safeNameInput"
             type="text"
@@ -101,13 +121,15 @@ function CreateSafe(props) {
         >
           Cancel
         </button>
-        {(description.length < 10 || name.length < 1 || owner.length < 1) && (
+        {description.length < 10 ||
+        name.length < 1 ||
+        owner.length < 1 ||
+        exists ? (
           <button disabled={true} id="createBtnDisabled">
             <FontAwesomeIcon id="faPlus" icon={faPlus} />
             Create
           </button>
-        )}
-        {description.length >= 10 && name.length > 1 && owner.length > 1 && (
+        ) : (
           <button
             id="createBtn"
             onClick={() => {
@@ -133,6 +155,32 @@ function CreateSafe(props) {
             Create
           </button>
         )}
+        {/* {description.length >= 10 && name.length > 1 && owner.length > 1 && (
+          <button
+            id="createBtn"
+            onClick={() => {
+              dispatch(
+                addSafe({
+                  id: id,
+                  name: name,
+                  owner: owner,
+                  type: type,
+                  description: description,
+                  secret: secret,
+                })
+              );
+              dispatch(
+                setCurId({
+                  id: id,
+                })
+              );
+              props.close();
+            }}
+          >
+            <FontAwesomeIcon id="faPlus" icon={faPlus} />
+            Create
+          </button>
+        )} */}
       </div>
     </div>
   );

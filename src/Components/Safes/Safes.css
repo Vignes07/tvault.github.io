@@ -5,6 +5,11 @@
   padding: 1rem 1.5rem;
   height: 2.8rem;
   gap: 1rem;
+  cursor: pointer;
+}
+
+.safesContainer:hover {
+  background-image: linear-gradient(to right, #72134b, #1d212c);
 }
 
 .safesContainerActive {
@@ -15,6 +20,7 @@
   height: 2.8rem;
   gap: 1rem;
   background-image: linear-gradient(to right, #72134b, #1d212c);
+  cursor: pointer;
 }
 
 .safesInfo {
@@ -58,6 +64,7 @@
 
 .faPenToSquare,
 .faTrashCan {
+  cursor: pointer;
   background: transparent;
   font-size: 1rem;
   color: #5e627c;
@@ -70,4 +77,11 @@
 .safesListContainer {
   height: 28rem;
   overflow-y: auto;
+}
+
+.noResults {
+  text-align: center;
+  padding: 0.5rem;
+  font-size: 18px;
+  color: #5e627c;
 }

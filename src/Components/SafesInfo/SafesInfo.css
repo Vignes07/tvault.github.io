@@ -20,7 +20,7 @@
 .nameDesc > span {
   width: 20rem;
   height: 3rem;
-  cursor: pointer;
+  cursor: default;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

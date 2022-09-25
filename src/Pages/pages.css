@@ -1,4 +1,5 @@
 .container {
+  /* position: relative; */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -6,13 +7,26 @@
   background-color: white;
   height: 36rem;
   width: 75rem;
-  margin-left: 170px;
+  margin: 3.1rem 10rem;
 }
 
-.left {
+.main {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
+
+/* .container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  left: 13.3vw;
+  top: 16vh;
+  width: 73vw;
+  height: 77vh;
+  background-color: white;
+} */
 
 p {
   color: black;
